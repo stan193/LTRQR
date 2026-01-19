@@ -2,9 +2,9 @@
 <html>
 <head>
 <style>
-  body { font-family: 'Segoe UI', sans-serif; background-color: #1a1a2e; color: white; text-align: center; padding: 20px; }
-  .card { background: #16213e; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #0f3460; max-width: 400px; margin: auto; }
-  h1 { color: #4ecca3; font-size: 1.5rem; margin-bottom: 5px; }
+  body { font-family: 'Segoe UI', sans-serif; background-color: #2E1B70; color: white; text-align: center; padding: 20px; }
+  .card { background: #E33970; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #0f3460; max-width: 400px; margin: auto; }
+  h1 { color: #FFFFFF; font-size: 1.5rem; margin-bottom: 5px; }
   p.date { color: #95a5a6; font-size: 0.9rem; margin-bottom: 20px; }
   .staff-list { list-style: none; padding: 0; font-size: 1.2rem; }
   .staff-list li { padding: 10px 0; border-bottom: 1px solid #0f3460; }
@@ -14,11 +14,46 @@
 </head>
 <body>
 
+
+
+
 <div class="card">
   <h1>Today IT Night Shift</h1>
-  <p class="date">Monday, January 19, 2026</p>
-  <p>Today is <time datetime="2026-01-19">January 19, 2026</time></p>
   
+	<div id="clock-container">
+         <span id="live-clock">Loading...</span>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // Format the time (HH:MM:SS)
+            const timeString = now.toLocaleTimeString();
+            
+            // Format the date (Month Day, Year)
+            const dateString = now.toLocaleDateString(undefined, { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+
+            // Display both in the HTML
+            document.getElementById('live-clock').innerHTML = `${dateString} — ${timeString}`;
+        }
+
+        // Run the function once immediately so it doesn't wait 1 second to start
+        updateClock();
+
+        // Update the clock every 1000ms (1 second)
+        setInterval(updateClock, 1000);
+    </script>
+
+
+
+
+
   <ul class="staff-list">
     <li> MYAT <span class="status-badge">ON DUTY</span></li>
     
@@ -29,6 +64,4 @@
 </div>
 
 </body>
-
 </html>
-
