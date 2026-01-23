@@ -2,409 +2,316 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Night Shift Dashboard</title>
+  <title>Shift Dashboard</title>
   
-  <!-- Import Google Font -->
+  <!-- Font: Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- RESET & BASE --- */
-    :root {
-      --bg-dark: #0f0c29;
-      --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      --card-it-gradient: linear-gradient(135deg, #ec008c, #fc6767);
-      --card-wh-gradient: linear-gradient(135deg, #ff512f, #f09819);
-      --glass-border: 1px solid rgba(255, 255, 255, 0.2);
-      --shadow-lg: 0 20px 50px rgba(0,0,0,0.5);
-    }
-
+   
     body { 
       font-family: 'Poppins', sans-serif; 
-      background: var(--bg-gradient); 
+      background-color: #2E1B70; 
       color: white; 
       margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      overflow-x: hidden; /* Prevent scroll on mobile */
+      overflow-x: hidden;
     }
 
-    /* --- LOGO --- */
+    
     .logo-container {
       position: absolute;
       top: 25px;
       left: 25px;
-      background: rgba(255, 255, 255, 0.95); 
-      padding: 12px 25px;      
+      background-color: #FFFFFF; 
+      padding: 10px 25px;      
       border-radius: 12px;      
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
       z-index: 100;
-      transition: transform 0.3s ease;
+      text-decoration: none; /* No underline */
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    
-    .logo-container:hover { transform: scale(1.02); }
-    .top-left-img { height: 35px; width: auto; display: block; }
 
-    /* --- MAIN CARD --- */
+    .logo-container:hover {
+        transform: scale(1.05); /* Slight zoom on hover */
+        box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+
+    .top-left-img { height: 35px; width: auto; display: block; border: none; }
+
+    /* Main Card */
     .card { 
-      background: var(--card-it-gradient); /* Default IT */
+      background: #E33970; /* Default IT Pink */
       border-radius: 30px; 
-      padding: 40px 30px; 
-      box-shadow: var(--shadow-lg); 
-      border: var(--glass-border); 
+      padding: 30px; 
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+      border: 1px solid rgba(255,255,255,0.1); 
       max-width: 380px; 
       width: 85%; 
       text-align: center;
+      transition: background-color 0.4s ease; 
       position: relative;
-      overflow: hidden;
-      transition: background 0.8s ease; /* Smooth color transition */
     }
 
-    /* Decorative background circle */
-    .card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    /* --- DEPARTMENT SWITCHER --- */
-    .dept-selector {
-        display: inline-flex;
-        background: rgba(0,0,0,0.25);
-        padding: 5px;
+    /* --- THE SWITCH --- */
+    .switch-wrapper {
+        background: rgba(0, 0, 0, 0.2);
         border-radius: 50px;
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
         margin-bottom: 25px;
-        position: relative;
-        z-index: 2;
-        box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+        border: 1px solid rgba(255,255,255,0.2);
     }
 
-    .dept-btn {
-        background: transparent;
+    .switch-btn {
+        flex: 1;
+        padding: 12px 0;
         border: none;
-        color: rgba(255,255,255,0.7);
-        padding: 10px 25px;
         border-radius: 40px;
-        cursor: pointer;
+        background: transparent;
+        color: rgba(255,255,255,0.7);
+        font-family: 'Poppins', sans-serif;
         font-weight: 600;
-        font-size: 0.9rem;
-        font-family: inherit;
-        transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
     }
 
-    .dept-btn:hover { color: white; }
-
-    .dept-btn.active {
-        background: white;
-        color: #2E1B70;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        transform: scale(1.05);
+    .switch-btn.active {
+        background: #FFFFFF;
+        color: #2E1B70; 
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        transform: scale(1.02);
     }
 
-    /* --- TYPOGRAPHY --- */
+    /* Typography */
     h1 { 
-      font-size: 1.8rem; 
-      margin: 0 0 10px 0; 
-      font-weight: 700; 
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      letter-spacing: 0.5px;
+        font-size: 1.6rem; 
+        margin: 5px 0 10px 0; 
+        font-weight: 700; 
+        letter-spacing: 0.5px;
     }
 
-    /* --- CLOCK --- */
-    #clock-container { 
-      background: rgba(0,0,0,0.15);
-      border-radius: 15px;
-      padding: 15px;
-      margin: 20px 0;
-      backdrop-filter: blur(5px);
-    }
-    
-    .date-text { font-size: 0.9rem; opacity: 0.9; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;}
-    .time-text { font-size: 2.2rem; font-weight: 700; display: block; line-height: 1; }
+    #clock-container { margin: 15px 0; }
+    .time-text { font-size: 2.5rem; font-weight: 700; display: block; line-height: 1; margin-top: 5px; }
+    .date-text { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
 
-    /* --- STAFF & STATUS --- */
-    .staff-container { margin: 25px 0; }
-    
-    .staff-name { 
-      display: block; 
-      font-size: 1.4rem; 
-      font-weight: 600; 
-      margin-bottom: 8px; 
-    }
+    /* Staff & Status */
+    .staff-section { margin: 25px 0; }
+    .staff-name { font-size: 1.4rem; font-weight: 600; display: block; margin-bottom: 8px; }
     
     .status-badge { 
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 16px; 
-      border-radius: 20px; 
-      font-weight: 600; 
-      font-size: 0.85rem; 
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 20px; 
+        border-radius: 50px; 
+        font-weight: 600; 
+        font-size: 0.9rem; 
+        text-transform: uppercase;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
+    
+    .on-duty { background: #00E676; color: #053a1f; }
+    .off-duty { background: #546E7A; color: white; }
 
-    /* Status Colors */
-    .on-duty { background: #00b894; color: white; }
-    .off-duty { background: #636e72; color: white; }
-    .no-shift { background: #d63031; color: white; }
-
-    /* Pulsing Dot Animation */
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      background-color: white;
-      border-radius: 50%;
-      margin-right: 8px;
-      animation: pulse 1.5s infinite;
+    /* Pulse Dot */
+    .dot {
+        height: 10px; width: 10px;
+        background-color: currentColor;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+        animation: blink 1.5s infinite;
     }
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
-      70% { box-shadow: 0 0 0 6px rgba(255, 255, 255, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
-    }
-
-    /* --- ACTION BUTTONS --- */
-    .contact-section {
+    /* Action Buttons */
+    .contact-container {
       margin-top: 25px;
-      padding-top: 25px;
-      border-top: 1px dashed rgba(255, 255, 255, 0.3);
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
       display: flex;
       flex-direction: column;
       gap: 15px;
     }
 
-    .action-button {
+    .btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #1a1a2e;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 1rem;
-      padding: 14px 20px;
-      border-radius: 12px;
-      width: 100%;
-      box-sizing: border-box;
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
+      padding: 14px;
+      border-radius: 15px;
+      transition: transform 0.2s;
     }
+    .btn:hover { transform: translateY(-3px); }
 
-    .btn-whatsapp { background: #25D366; color: white; }
+    .btn-wa { background: #25D366; color: white; }
     .btn-call { background: white; color: #333; }
 
-    .action-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    /* Footer */
+    .footer-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: rgba(255,255,255,0.8);
+        font-size: 0.8rem;
     }
-    
-    .action-button span { z-index: 2; display: flex; align-items: center; gap: 8px; }
-
-    /* --- FOOTER LINKS --- */
-    .info-link {
-      display: inline-block;
-      margin-top: 25px;
-      color: rgba(255,255,255,0.8);
-      text-decoration: none;
-      font-size: 0.85rem;
-      border-bottom: 1px solid rgba(255,255,255,0.4);
-      padding-bottom: 2px;
-      transition: all 0.2s;
-    }
-    .info-link:hover { color: white; border-color: white; }
-
-    .shift-detail {
-      font-size: 0.75rem; 
-      background: rgba(0,0,0,0.2);
-      padding: 5px 10px;
-      border-radius: 8px;
-      display: inline-block;
-      margin-top: 20px;
-      opacity: 0.8;
+    .shift-info {
+        font-size: 0.75rem; 
+        background: rgba(0,0,0,0.2);
+        padding: 5px 12px;
+        border-radius: 20px;
+        margin-top: 15px;
+        display: inline-block;
     }
 
-    /* Mobile Tweaks */
     @media (max-width: 480px) {
-      .logo-container { top: 15px; left: 15px; padding: 8px 15px; }
-      .top-left-img { height: 28px; }
-      h1 { font-size: 1.5rem; }
+        .logo-container { top: 15px; left: 15px; padding: 8px 20px; }
+        .card { width: 90%; padding: 25px; }
     }
   </style>
 </head>
 <body>
 
-<!-- Logo -->
-<div class="logo-container">
+<!-- LOGO LINK -->
+<a href="https://www.lagardere-tr.ae/en/" target="_blank" class="logo-container">
     <img src="https://www.lagardere-tr.ae/sites/default/files/styles/185x58/public/logo_hd_3.png" alt="Logo" class="top-left-img">
-</div>
+</a>
 
-<!-- Main Card -->
 <div class="card" id="main-card">
   
-  <!-- Department Switcher -->
-  <div class="dept-selector">
-      <button class="dept-btn active" onclick="switchDept('IT')" id="btn-it">IT Support</button>
-      <button class="dept-btn" onclick="switchDept('WH')" id="btn-wh">Warehouse</button>
+  <!-- THE SWITCH -->
+  <div class="switch-wrapper">
+      <button class="switch-btn active" id="btn-it" onclick="toggleDept('IT')">IT Support</button>
+      <button class="switch-btn" id="btn-wh" onclick="toggleDept('WH')">Warehouse</button>
   </div>
 
   <h1 id="header-title">IT Night Shift</h1>
   
   <div id="clock-container">
-    <span id="date-display" class="date-text">Loading...</span>
-    <span id="time-display" class="time-text">--:--:--</span>
+    <span id="date-el" class="date-text">Loading...</span>
+    <span id="time-el" class="time-text">--:--</span>
   </div>
 
-  <div class="staff-container">
+  <div class="staff-section">
       <span id="staff-name" class="staff-name">NAME</span> 
-      <div id="duty-status" class="status-badge">
-        <!-- JS will inject content here -->
-        Checking...
-      </div>
+      <div id="status-badge" class="status-badge">Checking...</div>
   </div>
 
-  <div id="contact-area" class="contact-section">
-    <a href="#" id="whatsapp-link" target="_blank" class="action-button btn-whatsapp">
-       <span>💬 Message via WhatsApp</span>
+  <div id="contact-area" class="contact-container">
+    <a href="#" id="wa-link" target="_blank" class="btn btn-wa">
+       💬 WhatsApp
     </a>
 
-    <a href="#" id="call-link" class="action-button btn-call">
-       <span id="display-phone">📞 Call Support</span>
+    <a href="#" id="call-link" class="btn btn-call">
+       <span id="phone-display">📞 Call Support</span>
     </a>
   </div>
   
-  <a href="https://aeliadutyfree.sharepoint.com/sites/Lagardere-Helpdesk2" target="_blank" class="info-link" id="ticket-link">Raise a Support Ticket</a>
-
-  <div class="shift-detail">
-      <span id="shift-info">Shift: 9:00 PM - 6:00 AM</span>
-  </div>
+  <a href="https://aeliadutyfree.sharepoint.com/sites/Lagardere-Helpdesk2" target="_blank" class="footer-link" id="ticket-link">Raise Support Ticket</a>
+  <br>
+  <div class="shift-info" id="shift-hours">Shift: 9:00 PM - 6:00 AM</div>
 </div>
 
 <script>
   // ==========================================
   // --- CONFIGURATION ---
   // ==========================================
-  
-  const departments = {
+  const config = {
       IT: {
           title: "IT Night Shift",
-          staffName: "MYAT",
-          phoneNumber: "+971501058256",
-          isAvailable: true,
-          gradient: "linear-gradient(135deg, #ec008c, #fc6767)", // Pink/Red
-          ticketUrl: "https://aeliadutyfree.sharepoint.com/sites/Lagardere-Helpdesk2"
+          staff: "MYAT",
+          phone: "+971501058256",
+          color: "#E33970", 
+          startHour: 21,    
+          displayRange: "9:00 PM - 6:00 AM"
       },
       WH: {
           title: "Warehouse Shift",
-          staffName: "Ernest",       // <--- CHANGE THIS NAME
-          phoneNumber: "+971547275534", // <--- CHANGE THIS NUMBER
-          isAvailable: true,
-          gradient: "linear-gradient(135deg, #ec008c, #fc6767)", // Orange/Amber
-          ticketUrl: "#" 
+          staff: "WH TEAM", 
+          phone: "+971500000000", // Update this number
+          color: "#E33970", 
+          startHour: 20,    
+          displayRange: "8:00 PM - 6:00 AM"
       }
   };
 
-  let currentDept = 'IT'; 
+  let currentDept = 'IT';
 
   // ==========================================
 
-  function switchDept(dept) {
+  function toggleDept(dept) {
       currentDept = dept;
       
-      // Update Buttons UI
-      document.getElementById('btn-it').classList.remove('active');
-      document.getElementById('btn-wh').classList.remove('active');
+      // Update Switch Visuals
+      document.getElementById('btn-it').className = (dept === 'IT') ? 'switch-btn active' : 'switch-btn';
+      document.getElementById('btn-wh').className = (dept === 'WH') ? 'switch-btn active' : 'switch-btn';
       
-      if(dept === 'IT') document.getElementById('btn-it').classList.add('active');
-      if(dept === 'WH') document.getElementById('btn-wh').classList.add('active');
-
-      // Update Card Background Gradient
-      document.getElementById('main-card').style.background = departments[dept].gradient;
-
-      updateClock(); 
+      // Update Card Background Color
+      document.getElementById('main-card').style.background = config[dept].color;
+      
+      // Force Update Text/Status immediately
+      updateDashboard();
   }
 
-  function updateClock() {
-    const config = departments[currentDept];
+  function updateDashboard() {
+    const data = config[currentDept];
     const now = new Date();
     const hours = now.getHours();
     
-    // Format Time & Date
-    const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    const dateString = now.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' });
-    
-    document.getElementById('date-display').innerText = dateString;
-    document.getElementById('time-display').innerText = timeString;
+    // 1. Time & Date
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const dateStr = now.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' });
+    document.getElementById('time-el').innerText = timeStr;
+    document.getElementById('date-el').innerText = dateStr;
 
-    // DOM Elements
-    const statusBadge = document.getElementById('duty-status');
-    const staffNameEl = document.getElementById('staff-name');
-    const contactArea = document.getElementById('contact-area');
-    const headerTitle = document.getElementById('header-title');
-    const shiftInfo = document.getElementById('shift-info');
+    // 2. Static Info
+    document.getElementById('header-title').innerText = data.title;
+    document.getElementById('staff-name').innerText = data.staff;
+    document.getElementById('shift-hours').innerText = "Shift: " + data.displayRange;
+
+    // 3. Status Logic
+    // IT: 9pm(21) - 6am(6)
+    // WH: 8pm(20) - 6am(6)
+    const isOnDuty = (hours >= data.startHour || hours < 6);
+
+    const badge = document.getElementById('status-badge');
+    const contacts = document.getElementById('contact-area');
+    const waLink = document.getElementById('wa-link');
     const callLink = document.getElementById('call-link');
-    const whatsappLink = document.getElementById('whatsapp-link');
-    const displayPhone = document.getElementById('display-phone');
-    const ticketLink = document.getElementById('ticket-link');
-
-    // Update Header
-    headerTitle.innerHTML = config.title;
-    
-    // Update Ticket Link
-    if(config.ticketUrl && config.ticketUrl !== "#"){
-        ticketLink.style.display = "inline-block";
-        ticketLink.href = config.ticketUrl;
-    } else {
-        ticketLink.style.display = "none";
-    }
-
-    // Availability Check (Manual Override)
-    if (!config.isAvailable) {
-      staffNameEl.style.display = "none";
-      statusBadge.innerHTML = "No Shift Today";
-      statusBadge.className = "status-badge no-shift";
-      contactArea.style.display = "none"; 
-      shiftInfo.innerHTML = "Night shift is currently unavailable.";
-      return; 
-    }
-
-    // Logic: 9 PM (21) to 6 AM (6)
-    // You can change 21 to 18 for testing (6 PM)
-    const isOnDuty = (hours >= 21 || hours < 6);
-
-    staffNameEl.style.display = "block";
-    staffNameEl.innerHTML = config.staffName;
-    shiftInfo.innerHTML = "Shift: 9:00 PM - 6:00 AM";
+    const phoneDisplay = document.getElementById('phone-display');
 
     if (isOnDuty) {
-      // Add pulsing dot
-      statusBadge.innerHTML = '<span class="live-dot"></span> ON DUTY';
-      statusBadge.className = "status-badge on-duty";
-      contactArea.style.display = "flex"; 
-      
-      callLink.href = "tel:" + config.phoneNumber;
-      displayPhone.innerHTML = "📞 Call " + config.phoneNumber;
-      const cleanNumber = config.phoneNumber.replace('+', '');
-      whatsappLink.href = "https://wa.me/" + cleanNumber;
+        badge.innerHTML = '<span class="dot"></span> ON DUTY';
+        badge.className = "status-badge on-duty";
+        contacts.style.display = "flex";
+        
+        // Update Links
+        waLink.href = "https://wa.me/" + data.phone.replace('+', '');
+        callLink.href = "tel:" + data.phone;
+        phoneDisplay.innerText = "📞 Call " + data.phone;
     } else {
-      statusBadge.innerHTML = "OFF DUTY";
-      statusBadge.className = "status-badge off-duty";
-      contactArea.style.display = "none"; 
+        badge.innerHTML = "OFF DUTY";
+        badge.className = "status-badge off-duty";
+        contacts.style.display = "none";
     }
   }
 
-  // Initialize
-  updateClock();
-  setInterval(updateClock, 1000);
+  // Init
+  updateDashboard();
+  setInterval(updateDashboard, 1000);
 </script>
 
 </body>
