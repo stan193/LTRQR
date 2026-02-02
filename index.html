@@ -285,7 +285,7 @@
     // 3. Status Logic
     // IT: 9pm(21) - 6am(6)
     // WH: 8pm(20) - 6am(6)
-    const isOnDuty = (hours >= data.startHour || hours < 11);
+    const isOnDuty = (hours >= data.startHour || hours < 12);
 
     const badge = document.getElementById('status-badge');
     const contacts = document.getElementById('contact-area');
@@ -316,5 +316,6 @@
 
 </body>
 </html>
+
 
 
